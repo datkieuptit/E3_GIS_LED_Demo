@@ -1,0 +1,212 @@
+{
+  "system_overview": {
+    "total_intersections": 268,
+    "active_intersections": 261,
+    "total_routes": 28,
+    "led_boards": 142,
+    "active_led": 138,
+    "offline_led": 4,
+    "active_alerts": 17,
+    "congestion_alerts": 12,
+    "incident_alerts": 5,
+    "predicted_hotspots": 8,
+    "daily_app_users": 248000,
+    "daily_api_calls": 4280000,
+    "avg_travel_time_reduction": 18,
+    "alternative_routes_pushed": 3420
+  },
+  "license_info": {
+    "type": "Vĩnh viễn (Perpetual)",
+    "version": "E3 GIS & LED Control v3.0.1",
+    "max_intersections": 500,
+    "active_intersections": 261,
+    "max_led_boards": 300,
+    "active_led_boards": 138,
+    "support_until": "2028-12-31",
+    "compliance": ["TCVN 7887:2018", "ISO 39001 ITS", "EN 12966 (LED VMS)", "OpenAPI 3.0"],
+    "license_key": "CMC-E3-XXXX-XXXX-XXXX-2028"
+  },
+  "data_sources": [
+    { "id": "CAM03", "name": "Camera 03 - Đo đếm lưu lượng", "icon": "📊", "from": "Trực tiếp + qua E1", "data": "Volume, Speed, Queue, 17 loại xe", "freq": "Mỗi 1 phút", "protocol": "MQTT JSON", "status": "online", "color": "#10b981" },
+    { "id": "CAM04", "name": "Camera 04 - Toàn cảnh nút giao", "icon": "🔭", "from": "Trực tiếp + qua E1", "data": "O-D matrix, Bất thường nút giao", "freq": "Mỗi 15 phút + event", "protocol": "MQTT JSON", "status": "online", "color": "#3b82f6" },
+    { "id": "CAM02", "name": "Camera 02 - Vi phạm + LPR", "icon": "🚨", "from": "Qua E1", "data": "Ảnh vi phạm + biển số (chứng cứ)", "freq": "Mỗi sự kiện", "protocol": "MQTT / REST", "status": "online", "color": "#ef4444" },
+    { "id": "E2_SIGNAL", "name": "E2 - Trạng thái pha đèn", "icon": "🚦", "from": "API REST từ E2", "data": "Pha hiện tại, chu kỳ, plan", "freq": "Realtime", "protocol": "WebSocket + REST", "status": "online", "color": "#10b981" },
+    { "id": "WEATHER", "name": "Dữ liệu thời tiết", "icon": "🌦️", "from": "API ngoài (TT KTTV)", "data": "Mưa, sương mù, gió, nhiệt độ", "freq": "Mỗi 15 phút", "protocol": "REST API", "status": "online", "color": "#06b6d4" },
+    { "id": "EVENTS", "name": "Lịch sự kiện công cộng", "icon": "📅", "from": "Manual + API ngoài", "data": "Sự kiện sân vận động, lễ hội, tang lễ VIP", "freq": "Theo lịch", "protocol": "REST", "status": "online", "color": "#a855f7" }
+  ],
+  "routes": [
+    { "id": "R1", "name": "Đại lộ Thăng Long", "level": "free", "speed": 52, "speed_limit": 80, "length_km": 28.5, "lanes": 4, "vehicles": 12450, "travel_time_min": 32, "color": "#10b981" },
+    { "id": "R2", "name": "Vành đai 3", "level": "free", "speed": 48, "speed_limit": 80, "length_km": 65.0, "lanes": 5, "vehicles": 28400, "travel_time_min": 81, "color": "#10b981" },
+    { "id": "R3", "name": "Cầu Nhật Tân", "level": "free", "speed": 50, "speed_limit": 60, "length_km": 8.4, "lanes": 4, "vehicles": 9200, "travel_time_min": 10, "color": "#10b981" },
+    { "id": "R4", "name": "Phạm Hùng", "level": "moderate", "speed": 32, "speed_limit": 60, "length_km": 6.2, "lanes": 3, "vehicles": 18650, "travel_time_min": 12, "color": "#f59e0b" },
+    { "id": "R5", "name": "Trần Duy Hưng", "level": "moderate", "speed": 28, "speed_limit": 50, "length_km": 4.8, "lanes": 3, "vehicles": 15800, "travel_time_min": 10, "color": "#f59e0b" },
+    { "id": "R6", "name": "Cầu Giấy", "level": "moderate", "speed": 25, "speed_limit": 50, "length_km": 5.5, "lanes": 3, "vehicles": 17200, "travel_time_min": 13, "color": "#f59e0b" },
+    { "id": "R7", "name": "Kim Mã", "level": "slow", "speed": 18, "speed_limit": 50, "length_km": 4.2, "lanes": 3, "vehicles": 22400, "travel_time_min": 14, "color": "#fb923c" },
+    { "id": "R8", "name": "Láng Hạ", "level": "slow", "speed": 16, "speed_limit": 50, "length_km": 3.8, "lanes": 3, "vehicles": 19800, "travel_time_min": 14, "color": "#fb923c" },
+    { "id": "R9", "name": "Nguyễn Chí Thanh", "level": "slow", "speed": 19, "speed_limit": 50, "length_km": 2.9, "lanes": 3, "vehicles": 16400, "travel_time_min": 9, "color": "#fb923c" },
+    { "id": "R10", "name": "Tôn Đức Thắng", "level": "congested", "speed": 8, "speed_limit": 40, "length_km": 2.4, "lanes": 2, "vehicles": 21200, "travel_time_min": 18, "color": "#ef4444" },
+    { "id": "R11", "name": "Khâm Thiên", "level": "congested", "speed": 6, "speed_limit": 40, "length_km": 1.9, "lanes": 2, "vehicles": 18400, "travel_time_min": 19, "color": "#ef4444" },
+    { "id": "R12", "name": "Xã Đàn", "level": "congested", "speed": 9, "speed_limit": 40, "length_km": 2.6, "lanes": 2, "vehicles": 17800, "travel_time_min": 17, "color": "#ef4444" },
+    { "id": "R13", "name": "Giảng Võ", "level": "moderate", "speed": 30, "speed_limit": 50, "length_km": 3.2, "lanes": 3, "vehicles": 14200, "travel_time_min": 6, "color": "#f59e0b" },
+    { "id": "R14", "name": "Đê La Thành", "level": "slow", "speed": 17, "speed_limit": 50, "length_km": 5.1, "lanes": 2, "vehicles": 19600, "travel_time_min": 18, "color": "#fb923c" },
+    { "id": "R15", "name": "Lê Duẩn", "level": "moderate", "speed": 27, "speed_limit": 50, "length_km": 4.5, "lanes": 3, "vehicles": 15400, "travel_time_min": 10, "color": "#f59e0b" },
+    { "id": "R16", "name": "Trần Hưng Đạo", "level": "moderate", "speed": 33, "speed_limit": 50, "length_km": 3.8, "lanes": 3, "vehicles": 13200, "travel_time_min": 7, "color": "#f59e0b" },
+    { "id": "R17", "name": "Nguyễn Thái Học", "level": "free", "speed": 42, "speed_limit": 50, "length_km": 2.1, "lanes": 3, "vehicles": 9800, "travel_time_min": 3, "color": "#10b981" },
+    { "id": "R18", "name": "Hai Bà Trưng", "level": "moderate", "speed": 26, "speed_limit": 50, "length_km": 4.4, "lanes": 3, "vehicles": 14800, "travel_time_min": 10, "color": "#f59e0b" }
+  ],
+  "intersections": [
+    { "id": "INT_KIMMA", "name": "Ngã tư Kim Mã - NCT", "lat": 21.0285, "lng": 105.8142, "status": "congested", "wait_time": 78, "queue": 32, "speed_avg": 12, "vehicles_15min": 1820, "zone": "Ba Đình" },
+    { "id": "INT_LANGHA", "name": "Ngã tư Láng Hạ - Thái Hà", "lat": 21.0145, "lng": 105.8215, "status": "congested", "wait_time": 92, "queue": 38, "speed_avg": 8, "vehicles_15min": 1980, "zone": "Đống Đa" },
+    { "id": "INT_CAUGIAY", "name": "Ngã tư Cầu Giấy - Xuân Thủy", "lat": 21.0367, "lng": 105.7953, "status": "incident", "wait_time": 145, "queue": 56, "speed_avg": 4, "vehicles_15min": 2240, "zone": "Cầu Giấy" },
+    { "id": "INT_TONDUC", "name": "Tôn Đức Thắng - Khâm Thiên", "lat": 21.0220, "lng": 105.8302, "status": "congested", "wait_time": 105, "queue": 42, "speed_avg": 6, "vehicles_15min": 1680, "zone": "Đống Đa" },
+    { "id": "INT_DAOTUAN", "name": "Đào Tấn - Liễu Giai", "lat": 21.0341, "lng": 105.8152, "status": "moderate", "wait_time": 52, "queue": 18, "speed_avg": 24, "vehicles_15min": 1340, "zone": "Ba Đình" },
+    { "id": "INT_TRANDUY", "name": "Trần Duy Hưng - Hoàng Đạo", "lat": 21.0103, "lng": 105.8041, "status": "moderate", "wait_time": 48, "queue": 15, "speed_avg": 28, "vehicles_15min": 1240, "zone": "Cầu Giấy" },
+    { "id": "INT_DOIDONG", "name": "Đội Cấn - Kim Mã", "lat": 21.0312, "lng": 105.8178, "status": "ok", "wait_time": 32, "queue": 8, "speed_avg": 36, "vehicles_15min": 920, "zone": "Ba Đình" },
+    { "id": "INT_DAEWOO", "name": "Daewoo Hotel", "lat": 21.0295, "lng": 105.8133, "status": "ok", "wait_time": 28, "queue": 6, "speed_avg": 38, "vehicles_15min": 850, "zone": "Ba Đình" },
+    { "id": "INT_GIANG", "name": "Giảng Võ - Cát Linh", "lat": 21.0265, "lng": 105.8268, "status": "moderate", "wait_time": 45, "queue": 12, "speed_avg": 30, "vehicles_15min": 1080, "zone": "Đống Đa" },
+    { "id": "INT_LEDUAN", "name": "Lê Duẩn - Khâm Thiên", "lat": 21.0193, "lng": 105.8348, "status": "moderate", "wait_time": 50, "queue": 14, "speed_avg": 27, "vehicles_15min": 1150, "zone": "Đống Đa" },
+    { "id": "INT_HBTRUNG", "name": "Hai Bà Trưng - Trần Hưng Đạo", "lat": 21.0192, "lng": 105.8513, "status": "ok", "wait_time": 30, "queue": 7, "speed_avg": 35, "vehicles_15min": 980, "zone": "Hoàn Kiếm" }
+  ],
+  "alerts": [
+    { "id": "ALT_001", "type": "incident", "severity": "critical", "title": "Tai nạn 2 xe máy", "location": "Ngã tư Cầu Giấy - Xuân Thủy", "time": "vừa xong", "duration": "2 phút", "vehicles_affected": 240, "evidence_cam": "CAM_CG_T4_01", "source": "Camera 04 - phát hiện xe dừng đột ngột", "status": "active" },
+    { "id": "ALT_002", "type": "congestion", "severity": "high", "title": "Ùn tắc nặng", "location": "Ngã tư Láng Hạ - Thái Hà", "time": "5 phút", "duration": "ongoing", "vehicles_affected": 380, "speed_avg": 8, "queue_length": 38, "source": "Camera 03 - tốc độ trung bình giảm 75%", "status": "active" },
+    { "id": "ALT_003", "type": "congestion", "severity": "high", "title": "Ùn tắc kéo dài", "location": "Tôn Đức Thắng - Khâm Thiên", "time": "12 phút", "duration": "ongoing", "vehicles_affected": 285, "speed_avg": 6, "queue_length": 42, "source": "Camera 03 + E2 (queue overflow)", "status": "active" },
+    { "id": "ALT_004", "type": "incident", "severity": "high", "title": "Va chạm xe ô tô + xe máy", "location": "Cầu Long Biên hướng vào nội đô", "time": "18 phút", "duration": "ongoing", "vehicles_affected": 145, "evidence_cam": "CAM_LB_T4_02", "source": "Camera 04 - trajectory anomaly", "status": "active" },
+    { "id": "ALT_005", "type": "weather", "severity": "medium", "title": "Mưa lớn - giảm tầm nhìn", "location": "Toàn TP Hà Nội", "time": "25 phút", "duration": "ongoing", "vehicles_affected": 0, "source": "Trạm KTTV - cường độ 25mm/h", "status": "active" },
+    { "id": "ALT_006", "type": "congestion", "severity": "medium", "title": "Ùn tắc cục bộ", "location": "Kim Mã - Đào Tấn", "time": "32 phút", "duration": "ongoing", "vehicles_affected": 180, "speed_avg": 12, "source": "Camera 03 - density tăng 45%", "status": "active" },
+    { "id": "ALT_007", "type": "event", "severity": "medium", "title": "Sự kiện sân vận động Mỹ Đình", "location": "Khu vực sân Mỹ Đình", "time": "45 phút", "duration": "3h dự kiến", "vehicles_affected": 0, "source": "Lịch sự kiện - 30,000 người dự kiến", "status": "scheduled" },
+    { "id": "ALT_008", "type": "congestion", "severity": "low", "title": "Mật độ tăng nhẹ", "location": "Phạm Hùng - đoạn gần ĐH Quốc Gia", "time": "1h", "duration": "ongoing", "vehicles_affected": 95, "speed_avg": 24, "source": "Camera 03", "status": "active" }
+  ],
+  "led_boards": [
+    { "id": "LED_GW_BAC", "name": "Cửa ngõ Bắc - Cầu Nhật Tân", "type": "entrance", "location": "Đầu Cầu Nhật Tân", "status": "online", "size": "12m × 4m", "current_msg": "ÙN TẮC TÔN ĐỨC THẮNG - ĐI VÀO BẰNG CẦU LONG BIÊN", "msg_color": "amber", "auto_pushed": true },
+    { "id": "LED_GW_TAY", "name": "Cửa ngõ Tây - ĐL Thăng Long", "type": "entrance", "location": "Km 5 ĐL Thăng Long", "status": "online", "size": "12m × 4m", "current_msg": "MƯA LỚN - GIẢM TỐC ĐỘ - BẬT ĐÈN", "msg_color": "amber", "auto_pushed": true },
+    { "id": "LED_GW_NAM", "name": "Cửa ngõ Nam - QL1A", "type": "entrance", "location": "Km 2 QL1A vào Hà Nội", "status": "online", "size": "10m × 3m", "current_msg": "VÀO TP HÀ NỘI - GIỚI HẠN 80KM/H", "msg_color": "white", "auto_pushed": false },
+    { "id": "LED_R3_KM5", "name": "Vành đai 3 - Km 5", "type": "highway", "location": "VĐ3 hướng Bắc", "status": "online", "size": "8m × 3m", "current_msg": "ĐI THẲNG - 48 KM/H", "msg_color": "green", "auto_pushed": true },
+    { "id": "LED_R3_KM12", "name": "Vành đai 3 - Km 12", "type": "highway", "location": "VĐ3 hướng Đông", "status": "online", "size": "8m × 3m", "current_msg": "PHÍA TRƯỚC TAI NẠN - GIẢM TỐC", "msg_color": "red", "auto_pushed": true },
+    { "id": "LED_KIMMA", "name": "Kim Mã - Đào Tấn", "type": "local", "location": "Trên cầu vượt Kim Mã", "status": "online", "size": "6m × 2m", "current_msg": "ĐỀ XUẤT: ĐI ĐƯỜNG ĐỘI CẤN", "msg_color": "amber", "auto_pushed": true },
+    { "id": "LED_LANGHA", "name": "Láng Hạ - Thái Hà", "type": "local", "location": "Cầu vượt Láng Hạ", "status": "online", "size": "6m × 2m", "current_msg": "ÙN TẮC - ĐI ĐƯỜNG GIẢNG VÕ", "msg_color": "red", "auto_pushed": true },
+    { "id": "LED_CAUGIAY", "name": "Cầu Giấy - Xuân Thủy", "type": "local", "location": "Trên cầu vượt", "status": "online", "size": "6m × 2m", "current_msg": "TAI NẠN - CẤM ĐƯỜNG TẠM THỜI", "msg_color": "red", "auto_pushed": true },
+    { "id": "LED_TONDUC", "name": "Tôn Đức Thắng", "type": "local", "location": "Đầu Tôn Đức Thắng", "status": "online", "size": "5m × 2m", "current_msg": "ÙN TẮC - VÒNG ĐƯỜNG XÃ ĐÀN", "msg_color": "red", "auto_pushed": true },
+    { "id": "LED_TRANDUY", "name": "Trần Duy Hưng", "type": "local", "location": "Cầu vượt TDH", "status": "online", "size": "6m × 2m", "current_msg": "BÌNH THƯỜNG - 28 KM/H", "msg_color": "green", "auto_pushed": true },
+    { "id": "LED_VIP_01", "name": "Tin nhắn tùy chỉnh #1", "type": "local", "location": "Hồ Hoàn Kiếm", "status": "online", "size": "5m × 2m", "current_msg": "CHÚC MỪNG NĂM MỚI - LÁI XE AN TOÀN", "msg_color": "amber", "auto_pushed": false },
+    { "id": "LED_OFF_01", "name": "Khâm Thiên", "type": "local", "location": "Đầu Khâm Thiên", "status": "offline", "size": "5m × 2m", "current_msg": "—", "msg_color": "off", "auto_pushed": false }
+  ],
+  "led_message_templates": [
+    { "id": "TPL_CONGESTION", "category": "warning", "color": "red", "icon": "🔴", "text": "ÙN TẮC PHÍA TRƯỚC - {location}", "vars": ["location"] },
+    { "id": "TPL_INCIDENT", "category": "warning", "color": "red", "icon": "🚨", "text": "TAI NẠN - GIẢM TỐC ĐỘ - {location}", "vars": ["location"] },
+    { "id": "TPL_ALTERNATIVE", "category": "navigation", "color": "amber", "icon": "↗️", "text": "ĐỀ XUẤT: ĐI {alt_route} - TIẾT KIỆM {time_saved} PHÚT", "vars": ["alt_route", "time_saved"] },
+    { "id": "TPL_CLOSURE", "category": "warning", "color": "red", "icon": "🚫", "text": "CẤM ĐƯỜNG TẠM THỜI - VÒNG QUA {detour}", "vars": ["detour"] },
+    { "id": "TPL_WEATHER", "category": "info", "color": "amber", "icon": "🌧️", "text": "{weather} - GIẢM TỐC - BẬT ĐÈN", "vars": ["weather"] },
+    { "id": "TPL_NORMAL", "category": "info", "color": "green", "icon": "✅", "text": "BÌNH THƯỜNG - {speed} KM/H", "vars": ["speed"] },
+    { "id": "TPL_VIP", "category": "info", "color": "amber", "icon": "👑", "text": "ƯU TIÊN VIP - DỰ KIẾN {time}", "vars": ["time"] },
+    { "id": "TPL_CUSTOM", "category": "custom", "color": "white", "icon": "✏️", "text": "(Tin nhắn tùy chỉnh)", "vars": [] }
+  ],
+  "auto_push_rules": [
+    { "id": "RULE_001", "name": "Auto cảnh báo ùn tắc lên LED gần nhất", "condition": "Speed < 10 km/h trong > 5 phút", "action": "Push TPL_CONGESTION + TPL_ALTERNATIVE đến 3 LED gần nhất", "active": true, "triggered_today": 24 },
+    { "id": "RULE_002", "name": "Auto cảnh báo tai nạn", "condition": "Camera 04 phát hiện trajectory anomaly", "action": "Push TPL_INCIDENT đến tất cả LED trong bán kính 2km", "active": true, "triggered_today": 5 },
+    { "id": "RULE_003", "name": "Tuyến thay thế tự động", "condition": "Tuyến chính ùn tắc + có tuyến thay thế khả thi (Dijkstra)", "action": "Tính tuyến thay thế nhanh nhất → Push lên LED đầu vào", "active": true, "triggered_today": 18 },
+    { "id": "RULE_004", "name": "Cảnh báo thời tiết", "condition": "Trạm KTTV: mưa > 20mm/h hoặc sương mù", "action": "Push TPL_WEATHER đến LED cửa ngõ + LED đường cao tốc", "active": true, "triggered_today": 3 },
+    { "id": "RULE_005", "name": "Reset về trạng thái bình thường", "condition": "Sự cố giải tỏa + speed > 30 km/h", "action": "Reset LED về TPL_NORMAL", "active": true, "triggered_today": 22 }
+  ],
+  "ai_predictions": [
+    { "id": "PRED_001", "area": "Ngã tư Đống Đa - Tôn Đức Thắng", "level": "critical", "predicted_in": "15 phút", "expected_speed": 6, "expected_queue": 50, "confidence": 92, "reason": "Pattern lịch sử + sự kiện sân Mỹ Đình + mưa", "model": "ST-GNN" },
+    { "id": "PRED_002", "area": "Vành đai 3 - đoạn Mai Dịch", "level": "high", "predicted_in": "25 phút", "expected_speed": 14, "expected_queue": 28, "confidence": 88, "reason": "Tan tầm + xe vào nội đô tăng 35%", "model": "LSTM" },
+    { "id": "PRED_003", "area": "Cầu Long Biên hướng vào", "level": "high", "predicted_in": "35 phút", "expected_speed": 12, "expected_queue": 32, "confidence": 84, "reason": "Tai nạn ALT_004 lan rộng", "model": "GNN cascading" },
+    { "id": "PRED_004", "area": "Trần Duy Hưng - Hoàng Đạo", "level": "medium", "predicted_in": "45 phút", "expected_speed": 18, "expected_queue": 18, "confidence": 76, "reason": "Pattern giờ tan tầm chiều thứ 4", "model": "LSTM" },
+    { "id": "PRED_005", "area": "Khâm Thiên - Lê Duẩn", "level": "medium", "predicted_in": "60 phút", "expected_speed": 16, "expected_queue": 22, "confidence": 72, "reason": "Pattern + ùn tắc lan từ Tôn Đức Thắng", "model": "ST-GNN" }
+  ],
+  "decision_suggestions": [
+    { "icon": "🚦", "title": "Đề xuất E2 tăng pha xanh hành lang Đại Cồ Việt", "desc": "Lưu lượng vào nội đô tăng 38% trong 15 phút tới (PRED_001). Đề xuất E2 tăng green time pha Đông-Tây thêm 8s.", "impact": "-22% delay dự kiến", "module": "AI Decision Support", "send_to": "E2 API" },
+    { "icon": "📍", "title": "Đề xuất tuyến thay thế: Kim Mã → Đội Cấn", "desc": "Dijkstra: tuyến Kim Mã hiện tại 18 phút, tuyến Đội Cấn 11 phút. Push lên LED_KIMMA, LED_GW_TAY.", "impact": "Tiết kiệm 7 phút/xe", "module": "Route Engine", "send_to": "LED Push" },
+    { "icon": "🚫", "title": "Đề xuất cấm đường tạm thời Cầu Giấy", "desc": "Tai nạn ALT_001 + queue 56 xe. Đề xuất cấm hướng vào trong 15-20 phút, vòng qua Trần Duy Hưng.", "impact": "Giải tỏa nhanh hơn 35%", "module": "Incident Manager", "send_to": "Operator + LED" },
+    { "icon": "📢", "title": "Push cảnh báo lên app người dân", "desc": "Đẩy thông báo đến 248K user app trong khu vực Đống Đa: 'Tránh khu vực Tôn Đức Thắng - Khâm Thiên'.", "impact": "Phân tán traffic", "module": "Public API", "send_to": "Mobile App" },
+    { "icon": "🌧️", "title": "Cảnh báo thời tiết lên LED cửa ngõ", "desc": "Mưa 25mm/h + dự báo kéo dài 1h. Push TPL_WEATHER đến 5 LED cửa ngõ.", "impact": "Giảm 18% tai nạn dự kiến", "module": "Weather Sync", "send_to": "LED Push" }
+  ],
+  "blackspots": [
+    { "rank": 1, "name": "Ngã tư Đống Đa - Tôn Đức Thắng", "type": "congestion", "incidents_per_week": 18, "avg_duration_min": 35, "peak_hours": "07:00-09:00, 17:00-19:00", "trend": "tăng", "zone": "Đống Đa" },
+    { "rank": 2, "name": "Cầu Giấy - Xuân Thủy", "type": "both", "incidents_per_week": 14, "avg_duration_min": 28, "peak_hours": "16:30-18:30", "trend": "ổn định", "zone": "Cầu Giấy" },
+    { "rank": 3, "name": "Khâm Thiên - Nguyễn Lương Bằng", "type": "congestion", "incidents_per_week": 12, "avg_duration_min": 32, "peak_hours": "07:30-08:30", "trend": "giảm", "zone": "Đống Đa" },
+    { "rank": 4, "name": "Cầu Long Biên hướng vào", "type": "accident", "incidents_per_week": 9, "avg_duration_min": 45, "peak_hours": "06:00-08:00, 17:00-20:00", "trend": "tăng", "zone": "Long Biên" },
+    { "rank": 5, "name": "Kim Mã - Nguyễn Chí Thanh", "type": "congestion", "incidents_per_week": 8, "avg_duration_min": 22, "peak_hours": "17:00-19:00", "trend": "ổn định", "zone": "Ba Đình" },
+    { "rank": 6, "name": "Láng Hạ - Thái Hà", "type": "congestion", "incidents_per_week": 7, "avg_duration_min": 25, "peak_hours": "07:00-08:30", "trend": "ổn định", "zone": "Đống Đa" },
+    { "rank": 7, "name": "Trần Duy Hưng - Hoàng Đạo", "type": "accident", "incidents_per_week": 5, "avg_duration_min": 38, "peak_hours": "07:00-09:00", "trend": "giảm", "zone": "Cầu Giấy" }
+  ],
+  "alternative_routes": [
+    { "from": "Cầu Nhật Tân (Bắc)", "to": "Trung tâm", "primary": "Võ Chí Công → Hoàng Quốc Việt → Đội Cấn", "primary_time": 28, "alternative": "Võ Chí Công → Phạm Văn Đồng → Cầu Giấy → Kim Mã", "alt_time": 35, "current_recommended": "primary", "reason": "Tuyến chính ổn định" },
+    { "from": "ĐL Thăng Long (Tây)", "to": "Trung tâm", "primary": "ĐLTL → Phạm Hùng → Trần Duy Hưng → Nguyễn Chí Thanh", "primary_time": 32, "alternative": "ĐLTL → Phạm Hùng → Mai Dịch → Cầu Giấy → Kim Mã", "alt_time": 28, "current_recommended": "alternative", "reason": "NCT ùn tắc, đi Cầu Giấy nhanh hơn 4 phút" },
+    { "from": "QL1A (Nam)", "to": "Trung tâm", "primary": "QL1A → Giải Phóng → Lê Duẩn", "primary_time": 25, "alternative": "QL1A → Trần Khát Chân → Bạch Mai → Phố Huế", "alt_time": 31, "current_recommended": "primary", "reason": "Tuyến chính tốt" },
+    { "from": "Đội Cấn", "to": "Cầu Giấy", "primary": "Đội Cấn → Kim Mã → Cầu Giấy", "primary_time": 18, "alternative": "Đội Cấn → Liễu Giai → Đào Tấn → Cầu Giấy", "alt_time": 11, "current_recommended": "alternative", "reason": "Kim Mã ùn tắc, tiết kiệm 7 phút" }
+  ],
+  "travel_times": [
+    { "from": "Cầu Nhật Tân", "to": "Hồ Hoàn Kiếm", "distance_km": 8.4, "free_time": 12, "current_time": 18, "delay_pct": 50 },
+    { "from": "ĐL Thăng Long Km5", "to": "Hồ Hoàn Kiếm", "distance_km": 18.2, "free_time": 24, "current_time": 35, "delay_pct": 46 },
+    { "from": "QL1A Cửa Nam", "to": "Hồ Hoàn Kiếm", "distance_km": 12.8, "free_time": 18, "current_time": 28, "delay_pct": 56 },
+    { "from": "Cầu Long Biên", "to": "Cầu Giấy", "distance_km": 9.5, "free_time": 14, "current_time": 32, "delay_pct": 129 },
+    { "from": "ĐH Quốc Gia", "to": "Hồ Hoàn Kiếm", "distance_km": 14.6, "free_time": 22, "current_time": 38, "delay_pct": 73 }
+  ],
+  "hourly_stats": [
+    { "hour": "00", "volume": 12, "avg_speed": 48, "alerts": 0 }, { "hour": "01", "volume": 8, "avg_speed": 50, "alerts": 0 },
+    { "hour": "02", "volume": 6, "avg_speed": 52, "alerts": 0 }, { "hour": "03", "volume": 5, "avg_speed": 52, "alerts": 0 },
+    { "hour": "04", "volume": 8, "avg_speed": 48, "alerts": 1 }, { "hour": "05", "volume": 18, "avg_speed": 42, "alerts": 1 },
+    { "hour": "06", "volume": 145, "avg_speed": 28, "alerts": 4 }, { "hour": "07", "volume": 285, "avg_speed": 14, "alerts": 12 },
+    { "hour": "08", "volume": 248, "avg_speed": 16, "alerts": 8 }, { "hour": "09", "volume": 165, "avg_speed": 24, "alerts": 4 },
+    { "hour": "10", "volume": 148, "avg_speed": 28, "alerts": 3 }, { "hour": "11", "volume": 158, "avg_speed": 26, "alerts": 4 },
+    { "hour": "12", "volume": 178, "avg_speed": 24, "alerts": 5 }, { "hour": "13", "volume": 162, "avg_speed": 25, "alerts": 4 },
+    { "hour": "14", "volume": 152, "avg_speed": 27, "alerts": 3 }, { "hour": "15", "volume": 168, "avg_speed": 25, "alerts": 5 },
+    { "hour": "16", "volume": 195, "avg_speed": 22, "alerts": 7 }, { "hour": "17", "volume": 312, "avg_speed": 12, "alerts": 14 },
+    { "hour": "18", "volume": 285, "avg_speed": 13, "alerts": 11 }, { "hour": "19", "volume": 198, "avg_speed": 20, "alerts": 6 },
+    { "hour": "20", "volume": 142, "avg_speed": 28, "alerts": 3 }, { "hour": "21", "volume": 95, "avg_speed": 35, "alerts": 2 },
+    { "hour": "22", "volume": 56, "avg_speed": 42, "alerts": 1 }, { "hour": "23", "volume": 28, "avg_speed": 45, "alerts": 0 }
+  ],
+  "weekly_stats": [
+    { "day": "T2", "volume_M": 4.28, "alerts": 142, "avg_speed": 24 },
+    { "day": "T3", "volume_M": 4.45, "alerts": 156, "avg_speed": 23 },
+    { "day": "T4", "volume_M": 4.52, "alerts": 168, "avg_speed": 22 },
+    { "day": "T5", "volume_M": 4.48, "alerts": 152, "avg_speed": 23 },
+    { "day": "T6", "volume_M": 4.85, "alerts": 198, "avg_speed": 20 },
+    { "day": "T7", "volume_M": 3.92, "alerts": 95, "avg_speed": 28 },
+    { "day": "CN", "volume_M": 3.45, "alerts": 78, "avg_speed": 32 }
+  ],
+  "public_api": [
+    { "method": "GET", "path": "/api/v1/public/traffic/now", "desc": "Tình trạng giao thông hiện tại theo tuyến", "calls_today": 1280000 },
+    { "method": "GET", "path": "/api/v1/public/route", "desc": "Tìm tuyến tối ưu A → B (kèm thời gian dự kiến)", "calls_today": 845000 },
+    { "method": "GET", "path": "/api/v1/public/alerts/nearby", "desc": "Cảnh báo gần vị trí (lat, lng, radius)", "calls_today": 1420000 },
+    { "method": "GET", "path": "/api/v1/public/intersection/{id}/wait", "desc": "Thời gian chờ tại nút giao", "calls_today": 380000 },
+    { "method": "WS", "path": "/ws/public/alerts-stream", "desc": "Stream cảnh báo realtime đến app", "calls_today": 56000 },
+    { "method": "GET", "path": "/api/v1/public/blackspots", "desc": "Danh sách điểm đen công khai", "calls_today": 18000 }
+  ],
+  "internal_api": [
+    { "method": "GET", "path": "/api/v1/network/topology", "desc": "Bản đồ mạng lưới + 250+ nút" },
+    { "method": "POST", "path": "/api/v1/led/{id}/push", "desc": "Push thông điệp lên LED" },
+    { "method": "POST", "path": "/api/v1/led/auto-rule", "desc": "Cấu hình rule auto-push" },
+    { "method": "GET", "path": "/api/v1/predictions/{area}", "desc": "Dự báo ùn tắc khu vực" },
+    { "method": "POST", "path": "/api/v1/decisions/recommend", "desc": "Đề xuất quyết định điều phối" }
+  ],
+  "citizen_app": {
+    "stats": {
+      "active_users_today": 248000,
+      "downloads_total": 1240000,
+      "avg_rating": 4.6,
+      "reviews_count": 18420,
+      "notifications_sent_today": 142000
+    }
+  },
+  "push_notifications": [
+    { "time": "vừa xong", "type": "incident", "title": "🚨 Tai nạn gần bạn", "body": "Phát hiện tai nạn tại Cầu Giấy - Xuân Thủy. Cách bạn 1.2km. Xem tuyến thay thế →", "location": "Quận Cầu Giấy" },
+    { "time": "5 phút", "type": "congestion", "title": "⚠️ Ùn tắc nặng phía trước", "body": "Tôn Đức Thắng đang ùn tắc nghiêm trọng (38 xe). Đề xuất: vòng qua Xã Đàn (-7 phút).", "location": "Quận Đống Đa" },
+    { "time": "12 phút", "type": "weather", "title": "🌧️ Mưa lớn - lái xe an toàn", "body": "Mưa cường độ 25mm/h trong 1h tới. Giảm tốc độ, bật đèn, tăng khoảng cách.", "location": "Toàn TP Hà Nội" },
+    { "time": "25 phút", "type": "info", "title": "🗺️ Tuyến đường tối ưu cập nhật", "body": "Sân bay Nội Bài → Hồ Hoàn Kiếm: hiện 42 phút (giảm 6 phút). Đi qua VĐ3.", "location": "Bạn theo dõi" },
+    { "time": "45 phút", "type": "event", "title": "📅 Sự kiện sân Mỹ Đình", "body": "Trận bóng đá 19:00. Tránh khu vực Phạm Hùng - Mỹ Đình từ 17:30 đến 22:00.", "location": "Quận Nam Từ Liêm" },
+    { "time": "1 giờ", "type": "report", "title": "✅ Báo sự cố của bạn đã được tiếp nhận", "body": "Sự cố ổ gà tại Khâm Thiên (báo lúc 9:15) đã chuyển đến đơn vị xử lý. Cảm ơn bạn!", "location": "Quận Đống Đa" }
+  ],
+  "citizen_features": [
+    { "icon": "🗺️", "title": "Bản đồ giao thông realtime", "desc": "Xem tốc độ, mật độ, ùn tắc trên mọi tuyến đường — cập nhật mỗi 30 giây" },
+    { "icon": "🛣️", "title": "Tìm tuyến tối ưu", "desc": "Dijkstra/A* tự tính tuyến nhanh nhất theo realtime traffic, hiển thị 3 phương án" },
+    { "icon": "🚨", "title": "Cảnh báo theo vị trí", "desc": "Push notification khi có ùn tắc, tai nạn, thời tiết xấu trong bán kính 5km" },
+    { "icon": "⏱️", "title": "Ước lượng thời gian di chuyển", "desc": "Travel time chính xác cho mọi cặp điểm A → B, so sánh với điều kiện free-flow" },
+    { "icon": "📢", "title": "Báo cáo sự cố cho dân", "desc": "Người dân chủ động báo ổ gà, ngập, đèn hỏng — tích hợp vào hệ thống điều phối" },
+    { "icon": "📊", "title": "Tốc độ trung bình tuyến", "desc": "Bản đồ nhiệt + biểu đồ tốc độ theo giờ giúp người dân lên kế hoạch" },
+    { "icon": "🚦", "title": "Trạng thái đèn tín hiệu", "desc": "Hiển thị trực tiếp pha đèn 684 tủ — biết khi nào đèn xanh để xuất phát" },
+    { "icon": "🏆", "title": "Điểm đen công khai", "desc": "Danh sách điểm thường xuyên ùn tắc/tai nạn để người dân chủ động tránh" }
+  ]
+}

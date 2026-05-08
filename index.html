@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E3 - GIS Map & LED Control | CamAI Ecosystem</title>
+    <meta name="description" content="Phần mềm bản đồ GIS, cảnh báo ùn tắc và điều khiển LED - CamAI E3">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <div class="logo-icon">🗺️</div>
+                <span class="logo-text">CamAI <span>E3</span></span>
+            </div>
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-tab="dashboard">📊 Tổng Quan Mạng Lưới</a>
+                <a href="#" class="nav-item" data-tab="map">🗺️ Bản Đồ GIS</a>
+                <a href="#" class="nav-item" data-tab="alerts">🚨 Cảnh Báo Ùn Tắc</a>
+                <a href="#" class="nav-item" data-tab="led">📺 Điều Khiển LED</a>
+                <a href="#" class="nav-item" data-tab="ai">🧠 AI Dự Đoán</a>
+                <a href="#" class="nav-item" data-tab="stats">📈 Thống Kê & Báo Cáo</a>
+                <a href="#" class="nav-item" data-tab="citizenapp">📱 App Người Dân</a>
+                <a href="#" class="nav-item" data-tab="health">💓 Giám Sát Hệ Thống</a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="status-dot online"></div>
+                <span>Hệ Thống Hoạt Động</span>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="top-bar">
+                <h1 id="pageTitle">Tổng Quan Mạng Lưới</h1>
+                <div class="header-right">
+                    <div class="system-overview">
+                        <span class="sys-stat">🔀 268 Nút Giao</span>
+                        <span class="sys-stat">📺 142 LED</span>
+                        <span class="sys-stat">🚨 17 Cảnh Báo</span>
+                    </div>
+                    <div class="hw-stats"><span>CPU 48%</span><span>GPU 65%</span><span>Net 580Mbps</span></div>
+                    <div class="notif">🔔<span class="badge">17</span></div>
+                    <div class="avatar">E3</div>
+                </div>
+            </header>
+
+            <!-- TAB 1: TỔNG QUAN -->
+            <section id="dashboardTab" class="tab active">
+                <div class="dashboard-cards">
+                    <div class="dash-card">
+                        <div class="card-icon">🔀</div>
+                        <div class="card-content">
+                            <div class="card-number">268</div>
+                            <div class="card-label">Nút Giao + 28 Tuyến</div>
+                            <div class="card-sub">>250 nút (PL06 #2)</div>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-icon">📺</div>
+                        <div class="card-content">
+                            <div class="card-number">142</div>
+                            <div class="card-label">Bảng LED</div>
+                            <div class="card-sub">138 Online • 4 Offline</div>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-icon">🚨</div>
+                        <div class="card-content">
+                            <div class="card-number" style="color:var(--danger);">17</div>
+                            <div class="card-label">Cảnh Báo Realtime</div>
+                            <div class="card-sub">12 ùn tắc • 5 sự cố</div>
+                        </div>
+                    </div>
+                    <div class="dash-card">
+                        <div class="card-icon">📱</div>
+                        <div class="card-content">
+                            <div class="card-number amber-text">248K</div>
+                            <div class="card-label">User App Hôm Nay</div>
+                            <div class="card-sub">4.28M API calls</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- License -->
+                <div class="license-section">
+                    <div class="license-card">
+                        <div class="license-icon">🔐</div>
+                        <div class="license-info">
+                            <div class="license-title">Bản Quyền Vĩnh Viễn (Perpetual License)</div>
+                            <div class="license-key" id="licenseKey">CMC-E3-XXXX-XXXX-XXXX-2028</div>
+                            <div class="license-meta">
+                                <span>Nút giao: <strong id="licInt">261 / 500</strong></span>
+                                <span>LED: <strong id="licLed">138 / 300</strong></span>
+                                <span>Hỗ trợ đến: <strong>2028-12-31</strong></span>
+                            </div>
+                        </div>
+                        <div class="compliance-tags" id="complianceTags"></div>
+                    </div>
+                </div>
+
+                <!-- Data sources from E1, E2, cameras -->
+                <div class="sensor-section">
+                    <h3>📡 Nguồn Dữ Liệu Đầu Vào — Tích Hợp Hệ Sinh Thái</h3>
+                    <div class="sensor-grid" id="dataSourceGrid"></div>
+                </div>
+
+                <!-- Recent Alerts -->
+                <div class="alerts-recent">
+                    <h3>🚨 Cảnh Báo Gần Đây</h3>
+                    <div class="alert-list-compact" id="recentAlertsList"></div>
+                </div>
+            </section>
+
+            <!-- TAB 2: BẢN ĐỒ GIS -->
+            <section id="mapTab" class="tab">
+                <div class="map-dashboard">
+                    <h3>🗺️ Bản Đồ Mạng Lưới Giao Thông - Tô màu theo tốc độ thực tế</h3>
+
+                    <!-- Layer Controls -->
+                    <div class="map-controls">
+                        <div class="layer-toggles">
+                            <label class="layer-toggle"><input type="checkbox" checked data-layer="routes"/> 🛣️ Tuyến đường</label>
+                            <label class="layer-toggle"><input type="checkbox" checked data-layer="intersections"/> 🔀 Nút giao</label>
+                            <label class="layer-toggle"><input type="checkbox" checked data-layer="alerts"/> 🚨 Cảnh báo</label>
+                            <label class="layer-toggle"><input type="checkbox" checked data-layer="leds"/> 📺 Bảng LED</label>
+                            <label class="layer-toggle"><input type="checkbox" data-layer="weather"/> 🌧️ Thời tiết</label>
+                        </div>
+                        <div class="speed-legend">
+                            <span class="sl-item green">>40 km/h</span>
+                            <span class="sl-item amber">20-40</span>
+                            <span class="sl-item orange">10-20</span>
+                            <span class="sl-item red"><10</span>
+                        </div>
+                    </div>
+
+                    <!-- Pseudo-map with route visualization -->
+                    <div class="gis-canvas" id="gisCanvas">
+                        <div class="map-grid-bg"></div>
+                        <svg class="map-svg" id="mapSvg" viewBox="0 0 1000 500" preserveAspectRatio="none"></svg>
+                        <div class="map-markers" id="mapMarkers"></div>
+                        <div class="map-overlay-info">
+                            <div class="moi-title">Hà Nội — Mạng lưới giao thông</div>
+                            <div class="moi-stats" id="mapStats">28 tuyến • 268 nút giao • cập nhật mỗi 30s</div>
+                        </div>
+                    </div>
+
+                    <!-- Route List -->
+                    <div class="route-list-section">
+                        <h3>🛣️ Trạng Thái Tuyến Đường (28 tuyến)</h3>
+                        <div class="route-list" id="routeList"></div>
+                    </div>
+
+                    <!-- Travel Time Estimator -->
+                    <div class="travel-time-section">
+                        <h3>⏱️ Ước Lượng Thời Gian Di Chuyển (PL06 #14)</h3>
+                        <div class="travel-time-grid" id="travelTimeGrid"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: CẢNH BÁO ÙN TẮC -->
+            <section id="alertsTab" class="tab">
+                <div class="alerts-dashboard">
+                    <h3>🚨 Cảnh Báo Ùn Tắc & Tai Nạn Realtime (PL06 #3-4)</h3>
+
+                    <!-- Alert summary -->
+                    <div class="alert-summary">
+                        <div class="al-card crit">
+                            <div class="al-icon">🚨</div>
+                            <div><div class="al-num" id="critCount">5</div><div class="al-label">Sự Cố Nghiêm Trọng</div></div>
+                        </div>
+                        <div class="al-card high">
+                            <div class="al-icon">⚠️</div>
+                            <div><div class="al-num" id="highCount">8</div><div class="al-label">Ùn Tắc Cao</div></div>
+                        </div>
+                        <div class="al-card med">
+                            <div class="al-icon">🟡</div>
+                            <div><div class="al-num" id="medCount">4</div><div class="al-label">Cảnh Báo Trung Bình</div></div>
+                        </div>
+                        <div class="al-card resolved">
+                            <div class="al-icon">✓</div>
+                            <div><div class="al-num">42</div><div class="al-label">Đã Giải Quyết Hôm Nay</div></div>
+                        </div>
+                    </div>
+
+                    <!-- Alert grid -->
+                    <div class="alerts-grid">
+                        <div class="alerts-main">
+                            <h4>📋 Danh Sách Cảnh Báo Hoạt Động</h4>
+                            <div class="alert-cards" id="alertCardsList"></div>
+                        </div>
+                        <div class="alert-detail" id="alertDetail">
+                            <h4>🔍 Chi Tiết Cảnh Báo</h4>
+                            <div class="alert-detail-content" id="alertDetailContent">
+                                <div class="empty-detail">← Chọn 1 cảnh báo bên trái để xem chi tiết</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: ĐIỀU KHIỂN LED -->
+            <section id="ledTab" class="tab">
+                <div class="led-dashboard">
+                    <h3>📺 Điều Khiển Bảng LED & Biển Báo Điện Tử (PL06 #5,7,8,9,10,11,12)</h3>
+
+                    <!-- LED Overview Cards -->
+                    <div class="led-overview-cards">
+                        <div class="dash-card"><div class="card-icon">📺</div><div class="card-content"><div class="card-number amber-text">142</div><div class="card-label">Tổng LED</div><div class="card-sub">138 online • 4 offline</div></div></div>
+                        <div class="dash-card"><div class="card-icon">🔄</div><div class="card-content"><div class="card-number amber-text">98</div><div class="card-label">Auto-Pushed Hôm Nay</div><div class="card-sub">PL06 #10 — auto cập nhật</div></div></div>
+                        <div class="dash-card"><div class="card-icon">✏️</div><div class="card-content"><div class="card-number amber-text">12</div><div class="card-label">Manual Override</div><div class="card-sub">PL06 #11 — tùy chỉnh</div></div></div>
+                        <div class="dash-card"><div class="card-icon">🚪</div><div class="card-content"><div class="card-number amber-text">5</div><div class="card-label">LED Cửa Ngõ TP</div><div class="card-sub">PL06 #8 — cảnh báo cửa ngõ</div></div></div>
+                    </div>
+
+                    <!-- LED Boards Grid -->
+                    <div class="led-boards-section">
+                        <h3>📋 Trạng Thái Bảng LED</h3>
+                        <div class="led-boards-grid" id="ledBoardsGrid"></div>
+                    </div>
+
+                    <!-- LED Editor -->
+                    <div class="led-editor-section">
+                        <h3>✏️ Soạn Tin Nhắn LED (Manual Override)</h3>
+                        <div class="led-editor">
+                            <div class="led-editor-form">
+                                <div class="form-row">
+                                    <label>Bảng LED đích:</label>
+                                    <select id="ledTarget">
+                                        <option value="all">— Tất cả LED —</option>
+                                    </select>
+                                </div>
+                                <div class="form-row">
+                                    <label>Mẫu tin:</label>
+                                    <select id="ledTemplate"></select>
+                                </div>
+                                <div class="form-row">
+                                    <label>Nội dung:</label>
+                                    <textarea id="ledMessageInput" rows="2" placeholder="Nhập tin nhắn LED..."></textarea>
+                                </div>
+                                <div class="form-row">
+                                    <label>Màu hiển thị:</label>
+                                    <div class="color-picker">
+                                        <button class="color-btn red" data-color="red">Đỏ</button>
+                                        <button class="color-btn amber active" data-color="amber">Vàng</button>
+                                        <button class="color-btn green" data-color="green">Xanh</button>
+                                        <button class="color-btn white" data-color="white">Trắng</button>
+                                    </div>
+                                </div>
+                                <button class="btn-push" id="btnPushLed">📤 PUSH LÊN LED</button>
+                            </div>
+                            <div class="led-preview-box">
+                                <div class="led-preview-label">PREVIEW LED (xem trước)</div>
+                                <div class="led-screen" id="ledPreview">— PREVIEW —</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Auto-push Rules -->
+                    <div class="autopush-section">
+                        <h3>🤖 Quy Tắc Auto-Push (PL06 #10) - Tự động cập nhật ùn tắc</h3>
+                        <div class="rules-list" id="rulesList"></div>
+                    </div>
+
+                    <!-- Alternative Routes (Dijkstra) -->
+                    <div class="alt-routes-section">
+                        <h3>↗ Tuyến Thay Thế Đề Xuất (PL06 #9 - Dijkstra/A*)</h3>
+                        <div class="alt-routes-list" id="altRoutesList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: AI DỰ ĐOÁN -->
+            <section id="aiTab" class="tab">
+                <div class="ai-dashboard">
+                    <h3>🧠 AI Dự Đoán & Hỗ Trợ Quyết Định (PL06 #6, #16)</h3>
+
+                    <!-- Prediction Forecast -->
+                    <div class="overview-grid">
+                        <div class="overview-section">
+                            <h3>🔮 Dự Báo Lưu Lượng 24h Tới</h3>
+                            <div class="forecast-chart" id="forecastChart"></div>
+                        </div>
+                        <div class="overview-section">
+                            <h3>🧠 Mô Hình AI</h3>
+                            <div class="model-info">
+                                <div class="geo-item"><span class="geo-label">Mô hình ngắn hạn:</span><span class="geo-value">LSTM (15-60 phút)</span></div>
+                                <div class="geo-item"><span class="geo-label">Mô hình trung hạn:</span><span class="geo-value">ST-GNN (1-4 giờ)</span></div>
+                                <div class="geo-item"><span class="geo-label">Mô hình dài hạn:</span><span class="geo-value">Pattern Matching</span></div>
+                                <div class="geo-item"><span class="geo-label">Đầu vào:</span><span class="geo-value">CAM03/04 + thời tiết + sự kiện</span></div>
+                                <div class="geo-item"><span class="geo-label">Cập nhật:</span><span class="geo-value">Mỗi 5 phút</span></div>
+                                <div class="geo-item"><span class="geo-label">Độ chính xác TB:</span><span class="geo-value">91.4%</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Predicted Hotspots -->
+                    <div class="predictions-section">
+                        <h3>🔥 Dự Báo Điểm Nóng Sắp Tới</h3>
+                        <div class="prediction-cards" id="predictionCards"></div>
+                    </div>
+
+                    <!-- Decision Suggestions -->
+                    <div class="optimization-section">
+                        <h3>💡 Đề Xuất Quyết Định Điều Phối (PL06 #6)</h3>
+                        <div class="suggestion-list" id="suggestionList"></div>
+                    </div>
+
+                    <!-- Blackspots -->
+                    <div class="blackspots-section">
+                        <h3>⚠️ Danh Sách Điểm Đen Ùn Tắc / Tai Nạn (PL06 #16)</h3>
+                        <table class="data-table blackspot-table" id="blackspotTable">
+                            <thead><tr><th>#</th><th>Vị Trí</th><th>Loại</th><th>Sự Cố / Tuần</th><th>TG TB</th><th>Giờ Cao Điểm</th><th>Xu Hướng</th><th>Khu Vực</th></tr></thead>
+                            <tbody id="blackspotBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 6: THỐNG KÊ -->
+            <section id="statsTab" class="tab">
+                <div class="stats-dashboard">
+                    <h3>📈 Thống Kê & Báo Cáo (PL06 #15)</h3>
+
+                    <div class="stats-cards">
+                        <div class="dash-card"><div class="card-icon">🚗</div><div class="card-content"><div class="card-number" id="stTotalVeh">4.28M</div><div class="card-label">Tổng Phương Tiện</div><div class="card-sub">Hôm nay</div></div></div>
+                        <div class="dash-card"><div class="card-icon">⚡</div><div class="card-content"><div class="card-number amber-text" id="stAvgSpeed">24</div><div class="card-label">Tốc Độ TB (km/h)</div><div class="card-sub">Toàn mạng</div></div></div>
+                        <div class="dash-card"><div class="card-icon">🚨</div><div class="card-content"><div class="card-number" style="color:var(--danger);" id="stAlerts">142</div><div class="card-label">Cảnh Báo Hôm Nay</div><div class="card-sub">↓18% so với hôm qua</div></div></div>
+                        <div class="dash-card"><div class="card-icon">📱</div><div class="card-content"><div class="card-number amber-text">3,420</div><div class="card-label">Tuyến TT Pushed</div><div class="card-sub">Tiết kiệm TB 7 phút/xe</div></div></div>
+                    </div>
+
+                    <!-- Hourly Traffic + Alerts -->
+                    <div class="overview-grid">
+                        <div class="overview-section">
+                            <h3>📊 Lưu Lượng + Cảnh Báo Theo Giờ</h3>
+                            <div class="dual-chart" id="hourlyDualChart"></div>
+                        </div>
+                        <div class="overview-section">
+                            <h3>📅 Thống Kê 7 Ngày Gần Nhất</h3>
+                            <div class="weekly-chart" id="weeklyChart"></div>
+                        </div>
+                    </div>
+
+                    <!-- Public API -->
+                    <div class="public-api-section">
+                        <h3>📱 Public API cho App / Web Người Dân (PL06 #17)</h3>
+                        <div class="api-list" id="publicApiList"></div>
+                    </div>
+
+                    <!-- Export -->
+                    <div class="export-section">
+                        <h3>📤 Xuất Báo Cáo</h3>
+                        <div class="export-form">
+                            <select><option>Theo ngày</option><option>Theo tuần</option><option>Theo tháng</option><option>Theo năm</option></select>
+                            <select><option>Tất cả khu vực</option><option>Đống Đa</option><option>Cầu Giấy</option><option>Ba Đình</option></select>
+                            <input type="text" placeholder="Khoảng thời gian"/>
+                            <button class="btn-export">📥 Xuất CSV</button>
+                            <button class="btn-export">📄 Xuất PDF</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 7: GIÁM SÁT HỆ THỐNG -->
+            <section id="healthTab" class="tab">
+                <div class="health-dashboard">
+                    <h3>💓 Giám Sát Sức Khỏe Hệ Thống E3</h3>
+                    <div class="health-grid">
+                        <div class="h-card"><div class="h-label">Sử Dụng CPU</div><div class="h-ring"><svg><circle class="ring-bg" cx="40" cy="40" r="36"></circle><circle class="ring-fill" cx="40" cy="40" r="36" stroke-dasharray="226" stroke-dashoffset="118"></circle></svg><div class="h-val">48%</div></div></div>
+                        <div class="h-card"><div class="h-label">Sử Dụng GPU</div><div class="h-ring"><svg><circle class="ring-bg" cx="40" cy="40" r="36"></circle><circle class="ring-fill gpu" cx="40" cy="40" r="36" stroke-dasharray="226" stroke-dashoffset="79"></circle></svg><div class="h-val">65%</div></div></div>
+                        <div class="h-card"><div class="h-label">Bộ Nhớ</div><div class="h-ring"><svg><circle class="ring-bg" cx="40" cy="40" r="36"></circle><circle class="ring-fill ram" cx="40" cy="40" r="36" stroke-dasharray="226" stroke-dashoffset="95"></circle></svg><div class="h-val">58%</div></div></div>
+                        <div class="h-card"><div class="h-label">I/O Mạng</div><div class="h-ring"><svg><circle class="ring-bg" cx="40" cy="40" r="36"></circle><circle class="ring-fill net" cx="40" cy="40" r="36" stroke-dasharray="226" stroke-dashoffset="113"></circle></svg><div class="h-val">50%</div></div></div>
+                    </div>
+
+                    <div class="server-table">
+                        <h3>🖥️ Hạ Tầng Máy Chủ E3</h3>
+                        <table class="data-table">
+                            <thead><tr><th>Máy Chủ</th><th>Vai Trò</th><th>Trạng Thái</th><th>CPU</th><th>RAM</th><th>GPU</th><th>Uptime</th></tr></thead>
+                            <tbody>
+                                <tr><td>E3-GIS-01</td><td>GIS Map Engine</td><td><span class="s-on">Trực Tuyến</span></td><td>48%</td><td>58%</td><td>—</td><td>99.9%</td></tr>
+                                <tr><td>E3-AI-01</td><td>AI Predict (LSTM/GNN)</td><td><span class="s-on">Trực Tuyến</span></td><td>72%</td><td>78%</td><td>65%</td><td>99.8%</td></tr>
+                                <tr><td>E3-LED-01</td><td>LED Controller</td><td><span class="s-on">Trực Tuyến</span></td><td>32%</td><td>42%</td><td>—</td><td>99.9%</td></tr>
+                                <tr><td>E3-API-01</td><td>Public API Gateway</td><td><span class="s-on">Trực Tuyến</span></td><td>52%</td><td>65%</td><td>—</td><td>99.9%</td></tr>
+                                <tr><td>E3-ALERT-01</td><td>Alert Engine</td><td><span class="s-warn">Cảnh Báo</span></td><td>85%</td><td>82%</td><td>—</td><td>99.6%</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Ecosystem Connectivity -->
+                    <div class="eco-section">
+                        <h3>🔗 Kết Nối Hệ Sinh Thái (E1, E2)</h3>
+                        <div class="eco-cards">
+                            <div class="eco-card ok"><div class="eco-name">⬅ E1 C-VMS</div><div class="eco-data">Video relay (CAM02/03/04)</div><div class="eco-status">✓ Online • 28ms</div></div>
+                            <div class="eco-card ok"><div class="eco-name">↔ E2 Signal Control</div><div class="eco-data">Trạng thái pha đèn (684 tủ)</div><div class="eco-status">✓ Online • 15ms</div></div>
+                            <div class="eco-card ok"><div class="eco-name">⬅ KTTV API</div><div class="eco-data">Dữ liệu thời tiết</div><div class="eco-status">✓ Online • 320ms</div></div>
+                            <div class="eco-card ok"><div class="eco-name">➡ Mobile App</div><div class="eco-data">Public API (248K user)</div><div class="eco-status">✓ Online • 4.28M calls</div></div>
+                            <div class="eco-card ok"><div class="eco-name">➡ 142 LED Boards</div><div class="eco-data">RS-485 + Ethernet</div><div class="eco-status">✓ 138 / 142 online</div></div>
+                        </div>
+                    </div>
+
+                    <!-- Internal API -->
+                    <div class="api-section">
+                        <h3>🔌 API Nội Bộ E3</h3>
+                        <div class="api-list" id="internalApiList"></div>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="main-footer">
+                <span>E3 GIS & LED Control v3.0.1</span>
+                <span>261 Nút Giao • 28 Tuyến • 138 LED</span>
+                <span>17 Cảnh Báo • 248K App Users</span>
+                <span>Ecosystem: E1✓ E2✓</span>
+            </footer>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
